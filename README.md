@@ -1,50 +1,55 @@
-# Interpretable features 
+# Automating the analysis of eye movement for different neurodegenerative disorders
 
-* All supporting functions are in "functions" folder. Please see the details for each function file in README.md within the folder
+Code for paper [Automating the analysis of eye movement for different neurodegenerative disorders](https://www.medrxiv.org/content/10.1101/2023.05.30.23290745v1).
 
-execute files are listed here:
+An automatic approach to identify eye motion states from eye tracking data and extract interpretable features, followed by calculating p values using statistical tests. 
 
-* **run_extract_trial.py** given the start and stop information, extract the trial from edf or asc files. Parameters:
-  * path input and output
-  * reextract, reprocess
-  * which trials
-  * analysis_constants, have tested, but change if needed
- 
-* **run_processing.py** get the eye movement and extract general eye movement features. save plots and summary csv as needed. Parameters:
-  * path input and output
-  * reextract, reprocess, save_processed, save_csv, save_plots, show_plots
-  * which trials
-  * analysis_constants, have tested, but change if needed
+## Setup
 
-* **run_saccade.py** . get the saccade analysis and extract saccade tasks features. save summary csv as needed. Parameters:
-  * path input and output
-  * reextract, reprocess, save_processed, save_csv
-  * which trials
-  * analysis_constants, have tested, but change if needed
-  * anti: anti-saccade or not
+``` sh
+# Create environment
+conda create -n eye
+conda activate eye
 
-* **run_summary.py** given summary csv, plot the boxplot and  calculate statistics. Parameters:
-  * path input and output
-  * use_trialContaining, plot_summaryBoxplots, plot_rawBoxplots, plot_correlations, pvalue_threshold, boxplot_orde
+# Install packages
+pip install -r requirements.txt
+```
 
-* **run_misc.py** miscellaneous activities such as:
-  * synchronize data files from OneDrive to local folder 
-  * horizontal versus. vertical saccades ratio
-  * calculate the mean and std of trails for general eyetracking feature in saccade tasks
-  * extract trial_info csv
-  * select the features that are statistically significant
+## Usage
 
-* **run_classification.py** use xgboost and cross validation on extracted features for classification. Parameters:
-  * source path 
-  * task_list 
+General eye movement features:
 
-* **run_classify.py** use xgboost, random forest, k-NN on extracted features for classification or k-means, tsne for clustering. Parameters:
-  * source path 
-  * normalize_data,  transform_data, transofrm_whiten_data, transformation
-  * print_all_accuracy, predict_kmeans, predict_xgboost, predict_knn, predict_randomForrest
- 
-* **Longitude_analysis.py** given the feature summary csv, perform longitude analysis for patients. Parameters:
-  * input path, output path 
- 
-* **xgb_multiclass_custom_softmax.py** a test demo for multi-class xgboost. Parameters:
-  * kRows, kCols, kClasses, kRounds
+``` sh
+python run_processing.py
+```
+
+Task-specific features:
+
+``` sh
+python run_saccade.py
+```
+
+Plot the boxplot and calculate statistics:
+``` sh
+python run_summary.py
+```
+
+
+## Citation
+
+Please cite our work if you find this repository helpful to your project.
+
+```sh
+@article{li2023automating,
+  title={Automating analysis of eye movement and feature extraction for different neurodegenerative disorders},
+  author={Li, Deming and Butala, Ankur A and Meyer, Trevor and Oh, Esther S and Motley, Chelsey and Moro-Velazquez, Laureano and Dehak, Najim},
+  journal={medRxiv},
+  pages={2023--05},
+  year={2023},
+  publisher={Cold Spring Harbor Laboratory Press}
+}
+```
+
+## Acknowledgement
+
+* Visualizations of statistical significance are adapted from [statannotations](https://github.com/trevismd/statannotations.git).
