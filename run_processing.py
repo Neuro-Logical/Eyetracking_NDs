@@ -28,8 +28,8 @@ def main():
     # path_data              = '/home/trevor-debian/Documents/datasets/data_eyetracking'
     # path_data              = '/Users/remus/Documents/jhu/PD_project/all_data/eyelink_test'
 
-    path_data              = '/Users/remus/Documents/jhu/PD_project/all_data/archive_eyelink'
-    path_output            = '/Users/remus/Documents/jhu/PD_project/all_data/abstract figures'
+    path_data              = '/Users/remus/Documents/jhu/PD_project/all_data/S'
+    path_output            = '/Users/remus/Documents/jhu/PD_project/all_data/S_output'
 
     # path_output            = '/Users/trevor/Dropbox/Mac (2)/Documents/outputs/eyelink_test'
     # path_output            = '/home/trevor-debian/Documents/outputs/eyetracking_output'
@@ -45,22 +45,22 @@ def main():
     save_processed         = False
     save_csv               = False
     add_annotation         = False
-    save_plots             = True
+    save_plots             = False
     show_plots             = False
 
     trials = {  # 'stroop':            [    'Word_Color_long',   'Word_Color_long_END',                  'WordColor'],
         # 'stroop_onlyText':   ['Colors_preliminary1','Colors_preliminaryEnd1', 'Secuence_stroop_Previous_1'],
         # 'stroop_onlyColors': ['Colors_preliminary2','Colors_preliminaryEnd2', 'Secuence_stroop_Previous_2'],
         # 'cookieThief':       ['Exploration_Cookie', 'Exploration_CookieEnd',                 'CookieThief']
-        # 'ReadRainbow1':    ['ReadRainbow1', 'ReadRainbowEnd1', 'NA'],
-        # 'ReadRainbow2':    ['ReadRainbow2', 'ReadRainbowEnd2', 'NA'],
-        'smoothPursuit1':      ['SmoothPur_1', 'SmoothPur_End1', 'NA'],
-        'smoothPursuit2':      ['SmoothPur_2', 'SmoothPur_End2', 'NA'],
-        'smoothPursuit3':      ['SmoothPur_3', 'SmoothPur_End3', 'NA'],
-        'smoothPursuit4':      ['SmoothPur_4', 'SmoothPur_End4', 'NA'],
-        'smoothPursuit5':      ['SmoothPur_5', 'SmoothPur_End5', 'NA'],
-        'smoothPursuit6':      ['SmoothPur_6', 'SmoothPur_End6', 'NA'],
-        'smoothPursuit7':      ['SmoothPur_7', 'SmoothPur_End7', 'NA'],
+        'ReadRainbow1':    ['ReadRainbow1', 'ReadRainbowEnd1', 'NA'],
+        'ReadRainbow2':    ['ReadRainbow2', 'ReadRainbowEnd2', 'NA'],
+        # 'smoothPursuit1':      ['SmoothPur_1', 'SmoothPur_End1', 'NA'],
+        # 'smoothPursuit2':      ['SmoothPur_2', 'SmoothPur_End2', 'NA'],
+        # 'smoothPursuit3':      ['SmoothPur_3', 'SmoothPur_End3', 'NA'],
+        # 'smoothPursuit4':      ['SmoothPur_4', 'SmoothPur_End4', 'NA'],
+        # 'smoothPursuit5':      ['SmoothPur_5', 'SmoothPur_End5', 'NA'],
+        # 'smoothPursuit6':      ['SmoothPur_6', 'SmoothPur_End6', 'NA'],
+        # 'smoothPursuit7':      ['SmoothPur_7', 'SmoothPur_End7', 'NA'],
 
         # 'ProsacVigorNaming1': ['Prosaccades_1', 'Prosaccadesend_1', 'VC_89'],  # Prosac_Vigor_1.wav
         # 'ProsacVigorNaming2': ['Prosaccades_2', 'Prosaccadesend_2', 'VC_90'],
@@ -145,7 +145,7 @@ def main():
     }
 
     anti = False
-    smooth = True
+    smooth = False
     analysis_constants = {
                         'closest_sac':       5, # ms           default=20
                         'closest_blink':    60, # ms           default=50
@@ -184,17 +184,18 @@ def main():
         path_group = os.path.join( path_data, group)
         if os.path.isdir(path_group):
             print('\n\n----------\n', group)
-            path_out_group = os.path.join( path_output_data, group)
+            path_out_group = os.path.join(path_output_data, group)
             if not os.path.exists(path_out_group):
                 os.mkdir(path_out_group)
 
             # Iterate through each subject in the experimental group
             for subject in sorted( os.listdir(path_group)):
-                # if subject != 'PEC_011':
-                #    continue
+                if subject != 'NLS_089_ses1':
+                    continue
                 if subject in ['NLS_089', 'PEC_014', 'AD_006', 'AD_010']:
                     continue
                 path_subject = os.path.join( path_group, subject)
+                print(path_subject)
                 if os.path.isdir(path_subject):
                     path_out_subject = os.path.join( path_out_group, subject)
                     if not os.path.exists(path_out_subject):
@@ -388,6 +389,8 @@ def main():
                                         fs_audio       = None
                                         # Prepare the trial eye data
                                         eye_lowError = eye_lowValError
+                                        if subject == 'NLS_089_ses1':
+                                            eye_lowError = 'RIGHT'
                                         if eye_lowError == 'LEFT':
                                             eye_lowError = 'left'
                                             df_trial.rename(columns={ 'pos_x_left':'pos_x',  'pos_y_left':'pos_y',  'vel_x_left':'vel_x',  'vel_y_left':'vel_y', 'pupil_left':'pupil'}, inplace=True)

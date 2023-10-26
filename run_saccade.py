@@ -30,7 +30,7 @@ def main():
     # path_output = '/Users/remus/Documents/jhu/PD_project/all_data/NLS_06_test'
     #
     path_data = '/Users/remus/Documents/jhu/PD_project/all_data/archive_eyelink'
-    path_output = '/Users/remus/Documents/jhu/PD_project/all_data/updated6/antisac_h'
+    path_output = '/Users/remus/Documents/jhu/PD_project/all_data/test'
 
     # path_data = '/Users/remus/Documents/jhu/PD_project/all_data/eyelink_test'
     # path_output = '/Users/remus/Documents/jhu/PD_project/all_data/eyelink_test_out'
@@ -45,7 +45,7 @@ def main():
     save_processed = True
     save_csv = True
     add_annotation = False
-    save_plots = True
+    save_plots = False
     show_plots = False
 
     trials = {  # 'stroop':            [    'Word_Color_long',   'Word_Color_long_END',                  'WordColor'],
@@ -122,7 +122,7 @@ def main():
         # 'Prosaccade14_v': ['Prosaccades_14', 'Prosaccadesend_14', 'VC_16'],
         # 'Prosaccade15_v': ['Prosaccades_15', 'Prosaccadesend_15', 'VC_17'],
         # 'Prosaccade16_h': ['Prosaccades_16', 'Prosaccadesend_16', 'VC_18'],
-        'Antisacca_Horiz1': ['Antisacc_Horiz_1', 'Antisacc_Horizend_1', 'VC_21'],
+        # 'Antisacca_Horiz1': ['Antisacc_Horiz_1', 'Antisacc_Horizend_1', 'VC_21'],
         'Antisacca_Horiz2': ['Antisacc_Horiz_2', 'Antisacc_Horizend_2', 'VC_22'],
         'Antisacca_Horiz3': ['Antisacc_Horiz_3', 'Antisacc_Horizend_3', 'VC_23'],
         'Antisacca_Horiz4': ['Antisacc_Horiz_4', 'Antisacc_Horizend_4', 'VC_24'],

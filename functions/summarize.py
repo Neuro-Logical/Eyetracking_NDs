@@ -1,6 +1,5 @@
 from scipy.stats import ranksums, kruskal, spearmanr, ttest_ind, pearsonr, kendalltau
 from sklearn.metrics import roc_auc_score
-from eyetracking.statannotations import Annotator
 import matplotlib.pyplot as plt
 from copy import deepcopy
 import seaborn as sns
@@ -10,6 +9,10 @@ import gc
 import os
 import pandas as pd
 
+try:
+    from eyetracking.statannotations import Annotator
+except:
+    from ..statannotations import Annotator
 
 def get_statistics( group_i, group_j, group_text='', pvalue_threshold=0.05):
     '''Returns dictionary containing statistics about the statistical independence of two groups.
